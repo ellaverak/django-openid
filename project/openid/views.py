@@ -29,10 +29,10 @@ def login(request):
     return oauth.helsinki.authorize_redirect(request, redirect_uri)
 
 
-def auth(request):
-    token = oauth.helsinki.authorize_access_token(request)
+#def auth(request):
+#    token = oauth.helsinki.authorize_access_token(request)
 #    request.session['user'] = token['userinfo']
-    return redirect('/')
+#    return redirect('/')
 
 
 #def logout(request):
