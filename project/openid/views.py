@@ -1,5 +1,5 @@
-import json
 from django.urls import reverse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from authlib.integrations.django_client import OAuth
 
@@ -15,10 +15,7 @@ oauth.register(
 
 
 def home(request):
-    user = request.session.get('user')
-    if user:
-        user = json.dumps(user)
-    return render(request, 'home.html', context={'user': user})
+    return HttpResponse("Home")
 
 
 def login(request):
@@ -29,9 +26,4 @@ def login(request):
 def auth(request):
     token = oauth.helsinki.authorize_access_token(request)
     request.session['user'] = token['userinfo']
-    return redirect('/')
-
-
-def logout(request):
-    request.session.pop('user', None)
     return redirect('/')
