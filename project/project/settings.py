@@ -131,9 +131,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# AUTHLIB CLIENTS
 AUTHLIB_OAUTH_CLIENTS = {
-    'helsinki': {
-        'client_id': env('OIDC_CLIENT_ID'),
-        'client_secret': env('OIDC_CLIENT_SECRET')
+    'google': {
+        'client_id': os.getenv('OIDC_CLIENT_ID'),
+        'client_secret': os.getenv('OIDC_CLIENT_SECRET'),
     }
 }

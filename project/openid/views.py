@@ -1,3 +1,4 @@
+import json
 from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -9,7 +10,7 @@ oauth.register(
     name='helsinki',
     server_metadata_url=CONF_URL,
     client_kwargs={
-        'scope': 'openid'
+        'scope': 'openid profile'
     }
 )
 
@@ -19,11 +20,5 @@ def home(request):
 
 
 def login(request):
-    redirect_uri = request.build_absolute_uri(reverse('auth'))
-    return oauth.helsinki.authorize_redirect(request, redirect_uri)
-
-
-def auth(request):
-    token = oauth.helsinki.authorize_access_token(request)
-    request.session['user'] = token['userinfo']
-    return redirect('/')
+    auth_url = 'https://login-test.it.helsinki.fi/idp/profile/oidc/authorize'
+    return oauth.helsinki.authorize_redirect(request, auth_url)
