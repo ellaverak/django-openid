@@ -9,6 +9,7 @@ oauth = OAuth()
 oauth.register(
     name='helsinki',
     server_metadata_url=CONF_URL,
+    userinfo_endpoint='https://login-test.it.helsinki.fi/idp/profile/oidc/userinfo',
     client_kwargs={
         'scope': 'openid profile'
     }
@@ -26,8 +27,9 @@ def login(request):
 
 def auth(request):
     token = oauth.helsinki.authorize_access_token(request)
-    user = request.session['user'] = token['userinfo']
-    mail = request.session['email'] = token['userinfo']
+#    user = request.session['user'] = token['userinfo']
+#    mail = request.session['email'] = token['userinfo']
+    user = oauth.helsinki.userinfo(token=token)
     print(user)
-    print(mail)
+#    print(mail)
     return redirect('/')
