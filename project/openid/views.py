@@ -32,7 +32,6 @@ claims_data = {
     }
 
 claims = json.dumps(claims_data)
-print(claims)
 
 def home(request):
     return HttpResponse("Home")
