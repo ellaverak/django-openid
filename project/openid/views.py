@@ -20,7 +20,7 @@ def home(request):
 
 
 def login(request):
-    redirect_uri = request.build_absolute_uri("http://localhost")
+    redirect_uri = request.build_absolute_uri(reverse('auth'))
     return oauth.helsinki.authorize_redirect(request, redirect_uri)
 
 
