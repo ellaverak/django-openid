@@ -45,8 +45,7 @@ def login(request):
 def auth(request):
     token = oauth.helsinki.authorize_access_token(request)
 #    user = request.session['user'] = token['userinfo']
-#    mail = request.session['email'] = token['userinfo']
-#    user = oauth.helsinki.userinfo(token=token)
+    mail = request.session['email'] = token['userinfo']
 #    print(user)
-#    print(mail)
+    print(mail)
     return redirect('/')
