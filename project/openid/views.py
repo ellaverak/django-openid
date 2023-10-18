@@ -21,7 +21,6 @@ def home(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('auth'))
-    print(redirect_uri)
     return oauth.helsinki.authorize_redirect(request, redirect_uri)
 
 
