@@ -23,8 +23,8 @@ claims_data = {
         },
         "userinfo": {
             "email": { "essential": True },
-            "family_name": None,
-            "given_name": None,
+            "family_name": { "essential": True },
+            "given_name": { "essential": True },
             "hyGroupCn": None,
             "hyPersonStudentId": { "essential": True },
             "uid": None
