@@ -137,28 +137,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-claims_data = {
-        "id_token": {
-            "hyPersonStudentId": None,
-            "uid": None
-        },
-        "userinfo": {
-            "email": None,
-            "family_name": None,
-            "given_name": None,
-            "hyGroupCn": None,
-            "hyPersonStudentId": None,
-            "uid": None
-        }
-    }
-
-claims = urllib.parse.quote(json.dumps(claims_data))
-
 # AUTHLIB CLIENTS
 AUTHLIB_OAUTH_CLIENTS = {
     'helsinki': {
         'client_id': os.getenv('OIDC_CLIENT_ID'),
-        'client_secret': os.getenv('OIDC_CLIENT_SECRET'),
-        'request_token_params': claims
+        'client_secret': os.getenv('OIDC_CLIENT_SECRET')
     }
 }
