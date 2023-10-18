@@ -20,5 +20,11 @@ def home(request):
 
 
 def login(request):
-    auth_url = 'https://login-test.it.helsinki.fi/idp/profile/oidc/authorize'
-    return oauth.helsinki.authorize_redirect(request, auth_url)
+    redirect_uri = request.build_absolute_uri(reverse('auth'))
+    return oauth.helsinki.authorize_redirect(request, redirect_uri)
+
+
+def auth(request):
+    token = oauth.helsinki.authorize_access_token(request)
+    request.session['user'] = token['userinfo']
+    return redirect('/')
