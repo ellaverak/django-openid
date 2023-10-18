@@ -12,27 +12,27 @@ oauth.register(
     name='helsinki',
     server_metadata_url=CONF_URL,
     client_kwargs={
-        'scope': 'openid profile'
+        'scope': 'openid'
     }
 )
 
 claims_data = {
         "id_token": {
-            "hyPersonStudentId": None,
+            "hyPersonStudentId": { "essential": True },
             "uid": None
         },
         "userinfo": {
-            "email": None,
+            "email": { "essential": True },
             "family_name": None,
             "given_name": None,
             "hyGroupCn": None,
-            "hyPersonStudentId": None,
+            "hyPersonStudentId": { "essential": True },
             "uid": None
         }
     }
 
 claims = json.dumps(claims_data)
-#claims = urllib.parse.quote(claims)
+print(claims)
 
 def home(request):
     return HttpResponse("Home")
