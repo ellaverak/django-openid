@@ -133,7 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AUTHLIB CLIENTS
 AUTHLIB_OAUTH_CLIENTS = {
-    'google': {
+    'helsinki': {
         'client_id': os.getenv('OIDC_CLIENT_ID'),
         'client_secret': os.getenv('OIDC_CLIENT_SECRET'),
     }
