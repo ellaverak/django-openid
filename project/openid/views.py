@@ -16,7 +16,7 @@ oauth.register(
     }
 )
 
-claims_data = {
+"""claims_data = {
         "id_token": {
             "hyPersonStudentId": None,
             "uid": None
@@ -31,7 +31,7 @@ claims_data = {
         }
     }
 
-claims = urllib.parse.quote(json.dumps(claims_data))
+claims = urllib.parse.quote(json.dumps(claims_data))"""
 
 
 def home(request):
@@ -40,7 +40,7 @@ def home(request):
 
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('auth'))
-    return oauth.helsinki.authorize_redirect(request, redirect_uri, claims=claims)
+    return oauth.helsinki.authorize_redirect(request, redirect_uri)
 
 
 def auth(request):
