@@ -58,7 +58,7 @@ def auth(request):
     #userinfo returns userinfo claims as a dictionary. For example: uid, given_name, family_name, email
     #print(userinfo)
 
-    resp = request.GET.get("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset")
+    resp = request.POST.get("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset")
     print(resp)
 
     #id_token = oauth.helsinki.fetch_token(code=code)
