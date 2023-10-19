@@ -5,8 +5,6 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from authlib.integrations.django_client import OAuth
-from authlib.oidc.core import CodeIDToken
-from authlib.jose import jwt
 
 
 CONF_URL = 'https://login-test.it.helsinki.fi/.well-known/openid-configuration'
@@ -59,5 +57,10 @@ def auth(request):
 #    claims = jwt.decode(resp['id_token'], keys, claims_cls=CodeIDToken)
 #    claims.validate()
 #    print(claims)
+
+    code = request.GET.get(code)
+    print(code)
+    id_token = oauth.helsinki.token(code)
+    print(id_token)
 
     return redirect('/')
