@@ -1,10 +1,10 @@
 import json
-import urllib.parse
-import requests
 from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from authlib.integrations.django_client import OAuth
+from authlib.oidc.core import CodeIDToken
+from authlib.jose import jwt
 
 
 CONF_URL = 'https://login-test.it.helsinki.fi/.well-known/openid-configuration'
@@ -44,19 +44,23 @@ def login(request):
 
 
 def auth(request):
-    #fetch access token
+    #fetch token
     token = oauth.helsinki.authorize_access_token(request)
-    print(token)
-    print(token['access_token'])
-    print(token['id_token'])
 
-    #use access token to access the userinfo endpoint via openid connect
-    user = oauth.helsinki.userinfo(token=token) #tällä saa uid eli tunnus, givenname, surname, email!
+    #token is a dictionary including the access_token, id_token etc.
+    #print(token)
+    #print(token['access_token'])
+    #print(token['id_token'])
+
+    #use tokens to access the userinfo endpoint via openid connect
+    userinfo = oauth.helsinki.userinfo(token=token)
 
     #userinfo returns userinfo claims as a dictionary. For example: uid, given_name, family_name, email
-    print(user)
+    #print(userinfo)
 
-    code = request.GET.get('code')
+    resp = request.GET.get("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset")
+    print(resp)
+
     #id_token = oauth.helsinki.fetch_token(code=code)
     #print(id_token)
 
