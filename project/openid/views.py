@@ -50,10 +50,16 @@ def login(request):
 
 def auth(request):
     token = oauth.helsinki.authorize_access_token(request)
-    #headers = {"Authorization": f"Token {token}"}
-    #userinfo = request.GET.get("/userinfo", headers=headers)
-    #print(userinfo)
-    #print(userinfo)
+    print(token)
+
+    headers = {"Authorization": f"Token {token}"}
+    url = "https://login-test.it.helsinki.fi/idp/profile/oidc/userinfo"
+    userinfo = requests.post(url, headers=headers)
+    print(userinfo)
+
+    family_name = request.session['family_name'] = token['userinfo']
+    print(family_name)
+
     user = oauth.helsinki.userinfo(token=token)
     print(user)
     return redirect('/')
