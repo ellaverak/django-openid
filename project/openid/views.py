@@ -38,7 +38,6 @@ def home(request):
     return HttpResponse("Home")
 
 
-
 def login(request):
     redirect_uri = request.build_absolute_uri(reverse('auth'))
     return oauth.helsinki.authorize_redirect(request, redirect_uri, claims=claims)
@@ -58,7 +57,7 @@ def auth(request):
 #    claims.validate()
 #    print(claims)
 
-    code = request.GET.get(code)
+    code = request.POST.get(code)
     print(code)
     id_token = oauth.helsinki.token(code)
     print(id_token)
