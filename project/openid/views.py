@@ -1,4 +1,4 @@
-import json
+import urllib.request, json
 from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -34,6 +34,10 @@ claims_data = {
 
 claims = json.dumps(claims_data)
 
+with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset") as url:
+    keys = json.load(url)
+
+
 def home(request):
     return HttpResponse("Home")
 
@@ -58,8 +62,9 @@ def auth(request):
     #userinfo returns userinfo claims as a dictionary. For example: uid, given_name, family_name, email
     #print(userinfo)
 
-    resp = request.POST.get("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset")
-    print(resp)
+    claims = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
+    claims.validate()
+    print(claims)
 
     #id_token = oauth.helsinki.fetch_token(code=code)
     #print(id_token)
