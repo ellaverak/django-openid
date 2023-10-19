@@ -1,5 +1,6 @@
 import json
 import urllib.parse
+import requests
 from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -34,7 +35,12 @@ claims_data = {
 claims = json.dumps(claims_data)
 
 def home(request):
+    #token ="1223"
+    #headers = {"Authorization": f"Token {token}"}
+    #url = "https://userinfo"
+    #requests.post(url, headers==headers)
     return HttpResponse("Home")
+
 
 
 def login(request):
@@ -44,8 +50,10 @@ def login(request):
 
 def auth(request):
     token = oauth.helsinki.authorize_access_token(request)
-#    user = request.session['user'] = token['userinfo']
-#    mail = request.session['email'] = token['userinfo']
-    userinfo = token['userinfo']
-    print(userinfo)
+    #headers = {"Authorization": f"Token {token}"}
+    #userinfo = request.GET.get("/userinfo", headers=headers)
+    #print(userinfo)
+    #print(userinfo)
+    user = oauth.helsinki.userinfo(token=token)
+    print(user)
     return redirect('/')
