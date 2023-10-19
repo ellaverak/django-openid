@@ -13,13 +13,13 @@ oauth.register(
     name='helsinki',
     server_metadata_url=CONF_URL,
     client_kwargs={
-        'scope': 'openid'
+        'scope': 'openid profile'
     }
 )
 
 claims_data = {
         "id_token": {
-            "hyPersonStudentId": { "essential": True },
+            "hyPersonStudentId": None,
             "uid": None
         },
         "userinfo": {
@@ -27,7 +27,7 @@ claims_data = {
             "family_name": { "essential": True },
             "given_name": { "essential": True },
             "hyGroupCn": None,
-            "hyPersonStudentId": { "essential": True },
+#            "hyPersonStudentId": { "essential": True },
             "uid": None
         }
     }
