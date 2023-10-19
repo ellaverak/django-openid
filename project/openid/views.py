@@ -46,15 +46,16 @@ def login(request):
 def auth(request):
     #fetch access token
     token = oauth.helsinki.authorize_access_token(request)
-    print(token)
+    print(token['access token'])
+    print(token['id token'])
 
     #use access token to access the userinfo endpoint via openid connect
-    user = oauth.helsinki.userinfo(token=token) #tällä saa uid eli tunnus, givenname, surname, email!
+    user = oauth.helsinki.userinfo(token=token['access token']) #tällä saa uid eli tunnus, givenname, surname, email!
 
     #userinfo returns userinfo claims as a dictionary. For example: uid, given_name, family_name, email
     print(user)
 
-    #code = request.GET.get('code')
+    code = request.GET.get('code')
     #id_token = oauth.helsinki.fetch_token(code=code)
     #print(id_token)
 
