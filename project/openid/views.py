@@ -19,7 +19,10 @@ oauth.register(
 
 claims_data = {
         "id_token": {
+            "email": None,
+            "given_name": None,
             "uid": None
+
         },
         "userinfo": {
             "email": None,
@@ -59,7 +62,7 @@ def auth(request):
     userinfo = oauth.helsinki.userinfo(token=token)
 
     #userinfo returns userinfo claims as a dictionary. For example: uid, given_name, family_name, email
-    #print(userinfo)
+    print(userinfo)
 
     claims = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
     claims.validate()
