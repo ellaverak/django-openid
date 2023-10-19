@@ -58,8 +58,7 @@ def auth(request):
 #    print(claims)
 
     code = request.GET.get('code')
-    print(code)
-    #id_token = oauth.helsinki.token(code)
-    #print(id_token)
+    id_token = oauth.helsinki.token(code)
+    print(id_token)
 
     return redirect('/')
