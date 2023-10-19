@@ -1,7 +1,7 @@
 import urllib.request, json
 from django.urls import reverse
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.shortcuts import redirect
 from authlib.integrations.django_client import OAuth
 from authlib.oidc.core import CodeIDToken
 from authlib.jose import jwt
@@ -44,7 +44,7 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
 
 
 def home(request):
-    return HttpResponse("Home")
+    return HttpResponse("Logged in :)")
 
 
 def login(request):
@@ -67,11 +67,11 @@ def auth(request):
     print(userinfo)
 
     #decode id_token
-    claims = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
-    claims.validate()
+    data = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
+    data.validate()
 
     #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
     #claims are presented as a dictionary
-    print(claims)
+    print(data)
 
-    return redirect('/')
+    return redirect(home)
