@@ -57,8 +57,8 @@ def auth(request):
 #    claims.validate()
 #    print(claims)
 
-    resp = request.GET.get()
-    print(resp)
+    code = request.GET.get('code')
+    print(code)
     #id_token = oauth.helsinki.token(code)
     #print(id_token)
 
