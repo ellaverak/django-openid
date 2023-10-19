@@ -5,6 +5,8 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from authlib.integrations.django_client import OAuth
+from authlib.oidc.core import CodeIDToken
+from authlib.jose import jwt
 
 
 CONF_URL = 'https://login-test.it.helsinki.fi/.well-known/openid-configuration'
@@ -35,10 +37,6 @@ claims_data = {
 claims = json.dumps(claims_data)
 
 def home(request):
-    #token ="1223"
-    #headers = {"Authorization": f"Token {token}"}
-    #url = "https://userinfo"
-    #requests.post(url, headers==headers)
     return HttpResponse("Home")
 
 
@@ -50,16 +48,16 @@ def login(request):
 
 def auth(request):
     token = oauth.helsinki.authorize_access_token(request)
-    print(token)
 
-    headers = {"Authorization": f"Token {token}"}
-    url = "https://login-test.it.helsinki.fi/idp/profile/oidc/userinfo"
-    userinfo = requests.post(url, headers=headers)
-    print(userinfo)
-
-    family_name = request.session['family_name'] = token['userinfo']
-    print(family_name)
-
-    user = oauth.helsinki.userinfo(token=token)
+    user = oauth.helsinki.userinfo(token=token) #tällä saa uid eli tunnus, givenname, surname, email!
     print(user)
+
+#    resp = oauth.helsinki.fetch_token(token)
+
+#    keys = request.GET.get("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset")
+
+#    claims = jwt.decode(resp['id_token'], keys, claims_cls=CodeIDToken)
+#    claims.validate()
+#    print(claims)
+
     return redirect('/')
