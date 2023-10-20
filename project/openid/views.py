@@ -29,7 +29,6 @@ claims_data = {
         "userinfo": {
             "email": None,
             "family_name": None,
-            "given_name": None,
             "hyGroupCn": None,
             "hyPersonStudentId": None,
             "uid": None
