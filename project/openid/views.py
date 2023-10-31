@@ -84,4 +84,5 @@ def auth(request):
 def log_out(request):
     request.session.pop('userinfo', None)
     request.session.pop('userdata', None)
-    return redirect("https://login-test.it.helsinki.fi/idp/profile/oauth2/revocation")
+    request.POST("https://login-test.it.helsinki.fi/idp/profile/oauth2/revocation", token=token)
+    return redirect("")
