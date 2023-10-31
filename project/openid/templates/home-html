@@ -1,3 +1,0 @@
-Logged in
-
-<a href="{% url 'home' %}">Logout</a>
