@@ -46,6 +46,7 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
 def home(request):
     print(request.session.get('userinfo'))
     print(request.session.get('userdata'))
+    print(request.session.get('access_token'))
     return render(request, "home.html")
 
 
@@ -78,12 +79,13 @@ def auth(request):
 
     request.session['userinfo'] = userinfo
     request.session['userdata'] = data
+    request.session['access_token'] = token['access_token']
 
     return redirect(home)
 
 def log_out(request):
+    request.POST("https://login-test.it.helsinki.fi/idp/profile/oauth2/revocation", token=request.session['access_token'])
     request.session.pop('userinfo', None)
     request.session.pop('userdata', None)
-    request.POST("https://login-test.it.helsinki.fi/idp/profile/oauth2/revocation", token=request.session['access_token'])
     request.session.pop('access_token', None)
-    return redirect(login)
+    return redirect("")
