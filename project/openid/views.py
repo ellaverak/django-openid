@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from authlib.integrations.django_client import OAuth
+from authlib.integrations.requests_client import OAuth2Session
 from authlib.oidc.core import CodeIDToken
 from authlib.jose import jwt
 
@@ -43,7 +44,9 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
 
 
 def home(request):
-    return HttpResponse("Logged in :)")
+    print(request.session.get('userinfo'))
+    print(request.session.get('userdata'))
+    return render(request, "home.html")
 
 
 def login(request):
@@ -63,7 +66,7 @@ def auth(request):
     userinfo = oauth.helsinki.userinfo(token=token)
 
     #userinfo returns userinfo claims as a dictionary. For example: uid, given_name, family_name, email
-    print(userinfo)
+#    print(userinfo)
 
     #decode id_token
     data = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
@@ -71,6 +74,14 @@ def auth(request):
 
     #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
     #claims are presented as a dictionary
-    print(data)
+#    print(data)
+
+    request.session['userinfo'] = userinfo
+    request.session['userdata'] = data
 
     return redirect(home)
+
+def log_out(request):
+    request.session.pop('userinfo', None)
+    request.session.pop('userdata', None)
+    return redirect("https://login-test.it.helsinki.fi/idp/profile/oauth2/revocation")
