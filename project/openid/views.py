@@ -1,7 +1,6 @@
 import urllib.request, json
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
 from authlib.integrations.django_client import OAuth
 from authlib.oidc.core import CodeIDToken
 from authlib.jose import jwt
@@ -42,7 +41,6 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
     keys = json.load(url)
 
 
-@login_required
 def home(request):
     print(request.session.get('userinfo'))
     print(request.session.get('userdata'))
