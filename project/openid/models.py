@@ -1,3 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+class User(AbstractUser):
+    """
+        Model for user-data
+
+    """
+    student_id = models.IntegerField(default=000000000)
+
