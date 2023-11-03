@@ -2,8 +2,7 @@ import urllib.request, json
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate
-from openid.logic import users
+from django.contrib.auth import authenticate, login, logout
 from authlib.integrations.django_client import OAuth
 from authlib.oidc.core import CodeIDToken
 from authlib.jose import jwt
@@ -44,6 +43,7 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
     keys = json.load(url)
 
 
+@login_required
 def home(request):
     print(request.session.get('userinfo'))
     print(request.session.get('userdata'))
@@ -79,20 +79,17 @@ def auth(request):
     #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
     #claims are presented as a dictionary
 
-    users.create_user(userinfo, userdata)
-
 #    request.session['userinfo'] = userinfo
 #    request.session['userdata'] = data
+
+    user = authenticate(userinfo, userdata)
+    if user is not None:
+        login(request, user)
 
     return redirect(home)
 
 def logout(request):
-    try:
-        del request.session['userinfo']
-        del request.session['userdata']
-        request.session.flush()
-    except:
-        pass
+    logout(request)
 
     #logout
     return redirect("https://login-test.it.helsinki.fi/idp/profile/Logout")
