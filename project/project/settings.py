@@ -136,7 +136,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # AUTHLIB CLIENTS
 AUTHLIB_OAUTH_CLIENTS = {
     'helsinki': {
