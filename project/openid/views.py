@@ -43,8 +43,12 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
 
 
 def home(request):
-    print(request.session.get('userinfo'))
-    print(request.session.get('userdata'))
+#    print(request.session.get('userinfo'))
+#    print(request.session.get('userdata'))
+
+    if request.user.is_authenticated:
+        print("juu")
+
     return render(request, "home.html")
 
 
