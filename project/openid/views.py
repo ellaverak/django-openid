@@ -43,6 +43,7 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
     keys = json.load(url)
 
 
+@login_required
 def home(request):
     return render(request, "home.html")
 
