@@ -73,13 +73,12 @@ def auth(request):
 
     user = authenticate(userinfo=userinfo)
     if user is not None:
-        print('TEST')
-#        login(user)
+        login(request, user)
 
     return redirect(home)
 
 def logout_id(request):
-#    logout(request)
+    logout(request)
 
     #logout
     return redirect("https://login-test.it.helsinki.fi/idp/profile/Logout")
