@@ -1,16 +1,16 @@
 from django.contrib.auth.backends import BaseBackend
-from project.openid.models import User
+from models import User
 
 
 class LoginBackend(BaseBackend):
-    def authenticate(self, request, userinfo, userdata):
+    def authenticate(self, request, userinfo=None):
         try:
             user = User.objects.get(email=userinfo['email'])
         except User.DoesNotExist:
             user = User(username=userinfo['uid'], first_name=userinfo['given_name'], last_name=userinfo['family_name'], email=userinfo['email'])
             user.save()
             return user
-        return None
+        return user
 
     def get_user(self, user_id):
         try:
