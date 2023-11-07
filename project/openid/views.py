@@ -44,12 +44,6 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
 
 
 def home(request):
-    print(request.session.get('userinfo'))
-    print(request.session.get('userdata'))
-
-#   if request.user.is_authenticated:
-#        print("toimii")
-
     return render(request, "home.html")
 
 
@@ -76,7 +70,6 @@ def auth(request):
     userdata.validate()
 
     #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
-    #claims are presented as a dictionary
 
 #    user = authenticate(userinfo=userinfo)
 #    if user is not None:
