@@ -141,7 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-AUTHENTICATION_BACKENDS = ['openid.LoginBackend']
+AUTHENTICATION_BACKENDS = ['openid.backend.LoginBackend']
 
 # AUTHLIB CLIENTS
 AUTHLIB_OAUTH_CLIENTS = {
