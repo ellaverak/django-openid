@@ -84,7 +84,8 @@ def auth(request):
 
     user = authenticate(userinfo=userinfo)
     if user is not None:
-        login(user)
+        print('TEST')
+#        login(user)
 
     return redirect(home)
 
