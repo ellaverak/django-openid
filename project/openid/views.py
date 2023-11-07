@@ -1,8 +1,8 @@
 import urllib.request, json
 from django.urls import reverse
 from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+#from django.contrib.auth.decorators import login_required
+#from django.contrib.auth import authenticate, login, logout
 from authlib.integrations.django_client import OAuth
 from authlib.oidc.core import CodeIDToken
 from authlib.jose import jwt
@@ -78,12 +78,9 @@ def auth(request):
     #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
     #claims are presented as a dictionary
 
-#    request.session['userinfo'] = userinfo
-#    request.session['userdata'] = data
-
-    user = authenticate(userinfo=userinfo)
-    if user is not None:
-        print('TEST')
+#    user = authenticate(userinfo=userinfo)
+#    if user is not None:
+#        print('TEST')
 #        login(user)
 
     return redirect(home)
