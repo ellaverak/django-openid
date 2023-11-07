@@ -1,8 +1,8 @@
-from django.contrib.auth.backends import BaseBackend
-from models import User
+#from django.contrib.auth.backends import BaseBackend
+from openid.models import User
 
 
-class LoginBackend(BaseBackend):
+class LoginBackend:
     def authenticate(self, request, userinfo=None):
         try:
             user = User.objects.get(email=userinfo['email'])

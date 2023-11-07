@@ -82,7 +82,7 @@ def auth(request):
 #    request.session['userinfo'] = userinfo
 #    request.session['userdata'] = data
 
-    user = authenticate(userinfo)
+    user = authenticate(userinfo=userinfo)
     if user is not None:
         login(request, user)
 
