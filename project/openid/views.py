@@ -53,7 +53,7 @@ def home(request):
     return render(request, "home.html")
 
 
-def login(request):
+def login_id(request):
     #build redirect_uri
     redirect_uri = request.build_absolute_uri(reverse('auth'))
     #authorize and provide claims
@@ -88,8 +88,8 @@ def auth(request):
 
     return redirect(home)
 
-def logout(request):
-    logout(request)
+def logout_id(request):
+#    logout(request)
 
     #logout
     return redirect("https://login-test.it.helsinki.fi/idp/profile/Logout")
