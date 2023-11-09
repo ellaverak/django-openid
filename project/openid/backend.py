@@ -1,5 +1,6 @@
 #from django.contrib.auth.backends import BaseBackend
 from openid.models import User
+from django.contrib.auth.hashers import make_password
 
 
 class LoginBackend:
@@ -7,7 +8,7 @@ class LoginBackend:
         try:
             user = User.objects.get(email=userinfo['email'])
         except User.DoesNotExist:
-            user = User(username=userinfo['uid'], first_name=userinfo['given_name'], last_name=userinfo['family_name'], email=userinfo['email'])
+            user = User(username=userinfo['uid'], first_name=userinfo['given_name'], last_name=userinfo['family_name'], email=userinfo['email'], password=make_password("test"), is_staff=1)
             user.save()
             return user
         return user
