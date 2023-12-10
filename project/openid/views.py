@@ -41,7 +41,7 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
     keys = json.load(url)
 
 
-@login_required
+@login_required(login_url="login")
 def home(request):
     return render(request, "home.html")
 
