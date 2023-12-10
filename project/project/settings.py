@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'
 
-AUTHENTICATION_BACKENDS = ['openid.backend.LoginBackend']
+AUTHENTICATION_BACKENDS = ['openid.authentication.LoginBackend']
 
 # AUTHLIB CLIENTS
 AUTHLIB_OAUTH_CLIENTS = {

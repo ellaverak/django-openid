@@ -2,7 +2,8 @@ import urllib.request, json
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate as django_authenticate
+from django.contrib.auth import login as django_login
 from authlib.integrations.django_client import OAuth
 from authlib.oidc.core import CodeIDToken
 from authlib.jose import jwt
@@ -22,16 +23,13 @@ oauth.register(
 #claims are provided to the authorization endpoint
 claims_data = {
         "id_token": {
-            "email": None,
-            "given_name": None,
-            "uid": None
+            "hyPersonStudentId": None
 
         },
         "userinfo": {
             "email": None,
             "family_name": None,
-            "hyGroupCn": None,
-            "hyPersonStudentId": None,
+            "given_name": None,
             "uid": None
         }
     }
@@ -48,7 +46,7 @@ def home(request):
     return render(request, "home.html")
 
 
-def login_id(request):
+def login(request):
     #build redirect_uri
     redirect_uri = request.build_absolute_uri(reverse('auth'))
     #authorize and provide claims
@@ -72,8 +70,8 @@ def auth(request):
 
     #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
 
-    user = authenticate(userinfo=userinfo)
+    user = django_authenticate(userinfo=userinfo, userdata=userdata)
     if user is not None:
-        login(request, user)
+        django_login(request, user)
 
     return redirect(home)
