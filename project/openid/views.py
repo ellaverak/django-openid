@@ -77,9 +77,3 @@ def auth(request):
         login(request, user)
 
     return redirect(home)
-
-def logout_id(request):
-    logout(request)
-
-    #logout
-    return redirect("https://login-test.it.helsinki.fi/idp/profile/Logout")
