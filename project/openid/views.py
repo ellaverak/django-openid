@@ -43,6 +43,9 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
 
 @login_required(login_url="login")
 def home(request):
+    """
+        Homepage
+    """
     return render(request, "home.html")
 
 
