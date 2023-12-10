@@ -47,13 +47,21 @@ def home(request):
 
 
 def login(request):
+    """
+        University login
+    """
     #build redirect_uri
     redirect_uri = request.build_absolute_uri(reverse('auth'))
+
     #authorize and provide claims
     return oauth.helsinki.authorize_redirect(request, redirect_uri, claims=claims)
 
 
 def auth(request):
+    """
+        University authentication
+    """
+
     #fetch token
     token = oauth.helsinki.authorize_access_token(request)
 
@@ -68,8 +76,9 @@ def auth(request):
     userdata = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
     userdata.validate()
 
-    #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userendpoint
+    #id_token includes user information (and other info), but the id_token is more highly secured than the userinfo at userinfo endpoint
 
+    #django authentication and login
     user = django_authenticate(userinfo=userinfo, userdata=userdata)
     if user is not None:
         django_login(request, user)

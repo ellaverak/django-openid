@@ -138,8 +138,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+
+# Logout redirects to University of Helsinki logout
 LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'
 
+# Custom authentication backend
 AUTHENTICATION_BACKENDS = ['openid.authentication.LoginBackend']
 
 # AUTHLIB CLIENTS

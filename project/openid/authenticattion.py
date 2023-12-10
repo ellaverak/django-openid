@@ -3,7 +3,13 @@ from django.contrib.auth.hashers import make_password
 
 
 class LoginBackend:
+    """
+        Class for custom authentication
+    """
     def authenticate(self, request, userinfo=None, userdata=None):
+        """
+            Function for custom authentication
+        """
         try:
             user = User.objects.get(email=userinfo['email'])
         except User.DoesNotExist:
@@ -14,6 +20,9 @@ class LoginBackend:
         return user
 
     def get_user(self, user_id):
+        """
+            Helper function for custom authentication
+        """
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
