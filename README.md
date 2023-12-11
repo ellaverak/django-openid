@@ -42,6 +42,7 @@ Defines the name of the new OAuth-client (helsinki) and sets the client_id and c
 Keyset for decoding userdata from the id_token is in json format.
 
 ```from django.contrib.auth import authenticate as django_authenticate```
+
 ```from django.contrib.auth import login as django_login```
 Django's inbuild functions are importent with custom names to avoid conflict with the view-function names.
 
