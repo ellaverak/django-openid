@@ -32,6 +32,12 @@ LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'
 Defines the logout url as the University of Helsinki logout url. When the logout url is defined in the setting it doesn't need to have it's own function in views.py. However ```path("accounts/", include("django.contrib.auth.urls"))``` needs to be added to [urls.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/urls.py)
 
 ```
+AUTHENTICATION_BACKENDS = ['openid.authentication.LoginBackend']
+```
+
+Defines a custom backend for django authentication.
+
+```
 AUTHLIB_OAUTH_CLIENTS = {
     'helsinki': {
         'client_id': os.getenv('OIDC_CLIENT_ID'),
@@ -145,7 +151,26 @@ user = django_authenticate(userinfo=userinfo, userdata=userdata)
 After a successful University of Helsinki login the user is logged in using a modified django-login. This ensures that the django framework works properly and the logged in user has access to django's default functionality.
 
 
+## [authentication.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/authentication.py)
 
+Django's default authentication backend uses usernames for authentication. This custom authentication backend chances that to emails. The backend is called after a successfull university login.
+
+
+## [models.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/models.py)
+
+```from django_cryptography.fields import encrypt```
+Database encryption is implemented using django-cryptography.
+
+```
+class User(AbstractUser):
+    student_id = encrypt((models.CharField(default="000000000")))
+    first_name = encrypt((models.CharField(max_length = 100)))
+    last_name = encrypt((models.CharField(max_length = 100)))
+    email = (models.CharField(max_length = 100))
+    username = encrypt((models.CharField(unique=True, max_length = 100)))
+```
+
+Defines the User-model corresponding to the user relation in the postgres database. Student_id, firsr-name, last_name and username are encrypted. Email is saved as plain text because django uses email for custom authentication and decrypting relation data is complicated during the authentication process.
 
 
 
