@@ -3,6 +3,6 @@ This project is an example of a Django OpenID Connect configuration for Universi
 
 ## Configuration
 
-### settings.py
+### [settings.py](https://github.com/ellaverak/django-openid/blob/main/project/project/settings.py)
 
 [settings.py](https://github.com/ellaverak/django-openid/blob/main/project/project/settings.py)
