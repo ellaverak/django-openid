@@ -32,9 +32,9 @@ AUTHLIB_OAUTH_CLIENTS = {
         'client_secret': os.getenv('OIDC_CLIENT_SECRET')
     }
 }
-
-## [views.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/views.py)
 ```
 
-Defines the name of the new OAUTH-client (helsinki) and sets the client_id and client_secret parameters. 
+Defines the name of the new OAUTH-client (helsinki) and sets the client_id and client_secret parameters.
+
+## [views.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/views.py)
 
