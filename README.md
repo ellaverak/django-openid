@@ -3,9 +3,9 @@ This project is an example of a Django OpenID Connect configuration for Universi
 
 # The Basics
 
-OpenID Connect is an identity layer built on top of the OAuth 2.0 framework. OpenID Connect is based on configuration data that is openly awailable and can be read by the OAuth-client. For example the configuration data for the University of Helsinki login (test) service can be found from https://login-test.it.helsinki.fi/.well-known/openid-configuration
+OpenID Connect is an identity layer built on top of the OAuth 2.0 framework. OpenID Connect is based on configuration data that is openly available and can be read by the OAuth-client. For example the configuration data for the University of Helsinki login (test) service can be found from https://login-test.it.helsinki.fi/.well-known/openid-configuration
 
-The OAuth-client is set up using the configuration data. The Client communicates with the University of Helsinki sp-registry service responsible for distibuting user data. User data can be reached via an userinfo endpoint or it can be decoded from an id_token.
+The OAuth-client is set up using the configuration data. The Client communicates with the University of Helsinki sp-registry service responsible for distributing user data. User data can be reached via an userinfo endpoint or it can be decoded from an id_token.
 
 # Configuration
 
@@ -170,7 +170,7 @@ class User(AbstractUser):
     username = encrypt((models.CharField(unique=True, max_length = 100)))
 ```
 
-Defines the User-model corresponding to the user relation in the postgres database. Student_id, firsr-name, last_name and username are encrypted. Email is saved as plain text because django uses email for custom authentication and decrypting relation data is complicated during the authentication process.
+Defines the User-model corresponding to the user relation in the postgres database. Student_id, first-name, last_name and username are encrypted. Email is saved as plain text because django uses email for custom authentication and decrypting relation data is complicated during the authentication process.
 
 
 
