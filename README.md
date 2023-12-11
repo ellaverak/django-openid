@@ -5,6 +5,15 @@ This project is an example of a Django OpenID Connect configuration for Universi
 
 ## [pyproject.toml](https://github.com/ellaverak/django-openid/blob/main/pyproject.toml)
 
+```authlib = "^1.2.1"```
+Configuration base for the OpenID Connect client.
+
+```psycopg2 = "^2.9.9"```
+This project uses a postgres database. The database connection is created with psycopg2.
+
+```django-cryptography = "^1.1"```
+Cryptography base for the postgres database.
+
 ## [settings.py](https://github.com/ellaverak/django-openid/blob/main/project/project/settings.py)
 
 ```LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'```
