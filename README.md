@@ -97,6 +97,10 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
     keys = json.load(url)
 ```
 
+Gets the keyset for decoding the id_token. The url can be found from the openid configuration data --> https://login-test.it.helsinki.fi/.well-known/openid-configuration
+
+
+
 
 
 
