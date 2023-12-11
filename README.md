@@ -3,6 +3,8 @@ This project is an example of a Django OpenID Connect configuration for Universi
 
 # Configuration
 
+## [pyproject.toml](https://github.com/ellaverak/django-openid/blob/main/pyproject.toml)
+
 ## [settings.py](https://github.com/ellaverak/django-openid/blob/main/project/project/settings.py)
 
 ```LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'```
@@ -16,3 +18,4 @@ AUTHLIB_OAUTH_CLIENTS = {
         'client_secret': os.getenv('OIDC_CLIENT_SECRET')
     }
 }```
+
