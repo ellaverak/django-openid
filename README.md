@@ -61,6 +61,43 @@ CodeIDToken includes the instructions for decoding the id_token.
 ```from authlib.jose import jwt```
 Used for transferring claims between the OAuth-client and the corresponding service.
 
+```
+CONF_URL = 'https://login-test.it.helsinki.fi/.well-known/openid-configuration'
+oauth = OAuth()
+oauth.register(
+    name='helsinki',
+    server_metadata_url=CONF_URL,
+    client_kwargs={
+        'scope': 'openid profile'
+    }
+)
+```
+
+Registers the OAuth-client (helsinki) using the openid-configuration.
+
+```
+claims_data = {
+        "id_token": {
+            "hyPersonStudentId": None
+
+        },
+        "userinfo": {
+            "email": None,
+            "family_name": None,
+            "given_name": None,
+            "uid": None
+        }
+    }
+```
+
+Defines the claims that OAuth-client requests from the service.
+
+```
+with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/keyset") as url:
+    keys = json.load(url)
+```
+
+
 
 
 
