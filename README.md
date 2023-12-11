@@ -5,6 +5,8 @@ This project is an example of a Django OpenID Connect configuration for Universi
 
 OpenID Connect is an identity layer built on top of the OAuth 2.0 framework. OpenID Connect is based on configuration data that is openly awailable and can be read by the OAuth-client. For example the configuration data for the University of Helsinki login (test) service can be found from https://login-test.it.helsinki.fi/.well-known/openid-configuration
 
+The OAuth-client is set up using the configuration data. The Client communicates with the University of Helsinki sp-registry service responsible for distibuting user data. User data can be reached via an userinfo endpoint or it can be decoded from an id_token.
+
 # Configuration
 
 ## [pyproject.toml](https://github.com/ellaverak/django-openid/blob/main/pyproject.toml)
