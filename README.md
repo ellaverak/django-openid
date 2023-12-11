@@ -19,7 +19,9 @@ Cryptography base for the postgres database.
 
 ## [settings.py](https://github.com/ellaverak/django-openid/blob/main/project/project/settings.py)
 
-```LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'```
+```
+LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'
+```
 
 Defines the logout url as the University of Helsinki logout url.
 
@@ -29,7 +31,8 @@ AUTHLIB_OAUTH_CLIENTS = {
         'client_id': os.getenv('OIDC_CLIENT_ID'),
         'client_secret': os.getenv('OIDC_CLIENT_SECRET')
     }
-}```
+}
+```
 
 Defines the name of the new OAUTH-client (helsinki) and sets the client_id and client_secret parameters. 
 
