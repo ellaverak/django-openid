@@ -8,9 +8,7 @@ This project is an example of a Django OpenID Connect configuration for Universi
 ```LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'```
 
 Defines the logout url as a University of Helsinki logout url.
-
-
-
+___
 ```
 AUTHLIB_OAUTH_CLIENTS = {
     'helsinki': {
