@@ -9,7 +9,8 @@ This project is an example of a Django OpenID Connect configuration for Universi
 
 Defines the logout url as a University of Helsinki logout url.
 
-```AUTHLIB_OAUTH_CLIENTS = {
+```
+AUTHLIB_OAUTH_CLIENTS = {
     'helsinki': {
         'client_id': os.getenv('OIDC_CLIENT_ID'),
         'client_secret': os.getenv('OIDC_CLIENT_SECRET')
