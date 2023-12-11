@@ -1,6 +1,10 @@
 # Django-openid Testproject for University of Helsinki Login Service
 This project is an example of a Django OpenID Connect configuration for University of Helsinki login service. The app connects to a test service and does not deal with any personal information of students or personnel.
 
+# The Basics
+
+OpenID Connect is an identity layer built on top of the OAuth 2.0 framework. OpenID Connect is based on configuration data that is openly awailable and can be read by the OAuth-client. For example the configuration data for the University of Helsinki login (test) service can be found from https://login-test.it.helsinki.fi/.well-known/openid-configuration
+
 # Configuration
 
 ## [pyproject.toml](https://github.com/ellaverak/django-openid/blob/main/pyproject.toml)
