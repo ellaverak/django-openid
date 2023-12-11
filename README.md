@@ -8,6 +8,9 @@ This project is an example of a Django OpenID Connect configuration for Universi
 ```authlib = "^1.2.1"```
 Configuration base for the OpenID Connect client.
 
+```django-environ = "^0.11.2"```
+Add-on for environemnt variables.
+
 ```psycopg2 = "^2.9.9"```
 This project uses a postgres database. The database connection is created with psycopg2.
 
@@ -27,4 +30,6 @@ AUTHLIB_OAUTH_CLIENTS = {
         'client_secret': os.getenv('OIDC_CLIENT_SECRET')
     }
 }```
+
+Defines the name of the new OAUTH-client (helsinki) and sets the client_id and client_secret parameters. 
 
