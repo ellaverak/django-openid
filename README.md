@@ -6,7 +6,7 @@ This project is an example of a Django OpenID Connect configuration for Universi
 ## [pyproject.toml](https://github.com/ellaverak/django-openid/blob/main/pyproject.toml)
 
 ```authlib = "^1.2.1"```
-Configuration base for the OpenID Connect client.
+Configuration base for the OpenID Connect client (OAuth-client).
 
 ```django-environ = "^0.11.2"```
 Add-on for environemnt variables.
@@ -34,7 +34,30 @@ AUTHLIB_OAUTH_CLIENTS = {
 }
 ```
 
-Defines the name of the new OAUTH-client (helsinki) and sets the client_id and client_secret parameters.
+Defines the name of the new OAuth-client (helsinki) and sets the client_id and client_secret parameters. The parameter values can be found from the University of Helsinki sp-registry.
 
 ## [views.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/views.py)
+
+```import urllib.request, json```
+Keyset for decoding userdata from the id_token is in json format.
+
+```from django.contrib.auth import authenticate as django_authenticate```
+```from django.contrib.auth import login as django_login```
+Django's inbuild functions are importent with custom names to avoid conflict with the view-function names.
+
+```from authlib.integrations.django_client import OAuth```
+OAuth-client.
+
+```from authlib.oidc.core import CodeIDToken```
+CodeIDToken includes the instructions for decoding the id_token.
+
+```from authlib.jose import jwt```
+Used for transferring claims between the OAuth-client and the corresponding service.
+
+
+
+
+
+
+
 
