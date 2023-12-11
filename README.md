@@ -29,7 +29,7 @@ Cryptography base for the postgres database.
 LOGOUT_REDIRECT_URL = 'https://login-test.it.helsinki.fi/idp/profile/Logout'
 ```
 
-Defines the logout url as the University of Helsinki logout url.
+Defines the logout url as the University of Helsinki logout url. When the logout url is defined in the setting it doesn't need to have it's own function in views.py. However ```path("accounts/", include("django.contrib.auth.urls"))``` needs to be added to [urls.py](https://github.com/ellaverak/django-openid/blob/main/project/openid/urls.py)
 
 ```
 AUTHLIB_OAUTH_CLIENTS = {
@@ -97,10 +97,52 @@ with urllib.request.urlopen("https://login-test.it.helsinki.fi/idp/profile/oidc/
     keys = json.load(url)
 ```
 
-Gets the keyset for decoding the id_token. The url can be found from the openid configuration data --> https://login-test.it.helsinki.fi/.well-known/openid-configuration
+Gets the keyset for decoding the id_token. The url can be found from the openid configuration data: https://login-test.it.helsinki.fi/.well-known/openid-configuration
 
-### login
+### login-function
 
+```
+redirect_uri = request.build_absolute_uri(reverse('auth'))
+```
+
+Builds the redirect url defined in the sp-registry. In this case the redirect url form is: [openshift-address]/auth/
+
+```
+return oauth.helsinki.authorize_redirect(request, redirect_uri, claims=claims)
+```
+
+Authorizes the redirect url and provides claims to the service.
+
+### auth-function
+
+```
+token = oauth.helsinki.authorize_access_token(request)
+```
+
+Fetches the token from the service after a successfull login. The token is a dictionary that includes the access_token, id_token etc.
+
+```
+userinfo = oauth.helsinki.userinfo(token=token)
+```
+
+The token is used to access the userinfo-enpoint. The userinfo-enpoint returns the data defined in the userinfo claims. The data is returned as a dictionary.
+
+```
+userdata = jwt.decode(token['id_token'], keys, claims_cls=CodeIDToken)
+userdata.validate()
+```
+
+Data from the id_token is decoded using the keys from the keyset and the instructions from the CodeIDToken. After that the data is validated and it is available as a dictionary.
+
+```
+user = django_authenticate(userinfo=userinfo, userdata=userdata)
+    if user is not None:
+        django_login(request, user)
+
+    return redirect(home)
+```
+
+After a successful University of Helsinki login the user is logged in using a modified django-login. This ensures that the django framework works properly and the logged in user has access to django's default functionality.
 
 
 
